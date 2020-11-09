@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <count @change='handerChange' ref="counter1"></count>
+    <count @change='handerChange' ref="counter2"></count>
+    <div>{{this.total}}</div>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('count',{
+      template:`<div @click='handerClick'>{{this.number}}</div>`,
+      data() {
+        return {
+          number:0
+        }
+      },
+      methods: {
+        handerClick(){
+          this.number++
+          this.$emit('change') //加一的同时进行将change事件抛给父组件
+        }
+      },
+    })
+    var vm = new Vue({
+      el:root,
+      data() {
+        return {
+          total:0
+        }
+      },
+      methods:{
+        handerChange(){
+          this.total=this.$refs.counter1.number+this.$refs.counter2.number
+        }
+      }
+    })
+  </script>
+</body>
+</html>
