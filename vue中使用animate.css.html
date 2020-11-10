@@ -8,6 +8,19 @@
       rel="stylesheet"
       href="./node_modules/animate.css/source/animate.css"
     />
+    <style>
+      .fade-enter {
+        opacity: 0;
+      }
+
+      .fade-leave-to {
+        opacity: 0;
+      }
+
+      .fade-enter-active .fade-leave-active {
+        transition: opacity 3s;
+      }
+    </style>
   </head>
 
   <body>
@@ -15,8 +28,8 @@
       <transition
         name="fade"
         appear
-        enter-active-class="animated swing"
-        leave-active-class="animated shake"
+        enter-active-class="animated swing fade-enter-active"
+        leave-active-class="animated shake fade-leave-active"
         appear-active-class="animated swing"
       >
         <div v-show="show">helloworld</div>
